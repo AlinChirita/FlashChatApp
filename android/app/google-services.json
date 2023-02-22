@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "227684280005",
+    "project_id": "flash-chat-e986b",
+    "storage_bucket": "flash-chat-e986b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227684280005:android:4a941a62f0f5aa1492b2ac",
+        "android_client_info": {
+          "package_name": "AlinChirita.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227684280005-08e96ebeadipkmsb8jkafc6pd7qv8rp2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYaFx_Yu68x1OWm4s1fPM2T_yTmUR-AJQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227684280005-08e96ebeadipkmsb8jkafc6pd7qv8rp2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
