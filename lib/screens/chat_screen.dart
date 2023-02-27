@@ -35,6 +35,22 @@ class _ChatScreenState extends State<ChatScreen> {
     } catch(e) {
       print(e);
     }
+  }
+
+  // void getMessages() async {
+  //   final messages = await _firestore.collection('messages').get();
+  //   for (var message in messages.docs) {
+  //     print(message.data());
+  //   }
+
+  // listen for the stream of messages coming from firebase
+  void messagesStream() async {
+    // list of future objects. We subscribe to this stream and listen to all the changes
+        await for (var snapshot in _firestore.collection('messages').snapshots()){
+          for (var message in snapshot.docs) {
+            print(message.data());
+          }
+        }
 
   }
 
@@ -47,9 +63,10 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
               icon: Icon(Icons.close),
               onPressed: () {
+                messagesStream();
                 //Implement logout functionality
-                _auth.signOut();
-                Navigator.pop(context);
+                // _auth.signOut();
+                // Navigator.pop(context);
               }),
         ],
         title: Text('⚡️Chat'),
@@ -60,6 +77,22 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            StreamBuilder<QuerySnapshot>(
+                stream: _firestore.collection('messages').snapshots(),
+                builder: (context, snapshot){
+                  if (snapshot.hasData) {
+                    final messages = snapshot.data?.docs;
+                    List<Text> messageWidgets = [];
+                    for (var doc in messages!) {
+                      final messageText = doc['text']; // this is firebase data
+                      final messageSender = doc['sender'];
+                      final messageWidget = Text('$messageText from $messageSender');
+                      messageWidgets.add(messageWidget);
+                    } //for
+                  } //if
+                  return Column(children: messageWidgets);
+                } //builder
+            ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
